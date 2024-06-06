@@ -22,7 +22,11 @@ namespace MappingObjects.Mappers
                 string.Format("{0} {1}",
                 src.Customer.FirstName,
                 src.Customer.LastName)
-                ));
+                ))
+                // We have removed a semi-colon from here.
+                  // Map the sum of items to the Total member.
+                .ForMember(dest => dest.Total, opt => opt.MapFrom(
+                src => src.Items.Sum(item => item.UnitPrice * item.Quantity))); ;
             });
             return config;
         }
